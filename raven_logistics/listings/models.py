@@ -24,7 +24,12 @@ class Post(models.Model):
         return self.title
 
 class Comment(models.Model):
-    author = models.CharField(max_length=60)
+    author = models.CharField(max_length=60, default="Candidate")
+    location = models.CharField(max_length=60, default='candidate location')
+    phone = models.CharField(max_length=60, default='candidate phone number')
+    email = models.CharField(max_length=60, default='candidate email')
+    certifications = models.CharField(max_length=60, default='candidate license')
+    availability = models.CharField(max_length=60, default='start date')
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey("Post", on_delete=models.CASCADE)

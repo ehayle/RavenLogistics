@@ -8,6 +8,8 @@
 
 {% block page_content %}
     <small>
+        <p>{{ post.pay_range }}</p>
+        <p>{{ post.location }}</p>
         {{ post.created_on.date }} | Categories:
         {% for category in post.categories.all %}
             <a href="{% url 'listings_category' category.name %}">
@@ -16,4 +18,25 @@
         {% endfor %}
     </small>
     <p>{{ post.body | linebreaks }}</p>
+
+    <h3>Apply Now</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name: {{ form.author }}</label>
+        
+        <label for="location">Location: {{ form.location }}</label>
+        
+        <label for="phone">Phone Number: {{ form.phone }}</label>
+        
+        <label for="email">Email Address: {{ form.email }}</label>
+        
+        <label for="license">License(s): {{ form.certifications }}</label>
+        
+        <label for="start-date">Start Date: {{ form.availability }}</label>
+
+        <label> {{ form.body }}</label>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
 {% endblock page_content %}

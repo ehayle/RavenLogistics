@@ -8,16 +8,27 @@
 {% block page_content %}
     {% block posts %}
         {% for post in posts %}
-            <h3><a href="{% url 'listings_detail' post.pk %}">{{ post.title }}</a></h3>
-            <small>
-                {{ post.created_on.date }} | Categories:
-                {% for category in post.categories.all %}
-                    <a href="{% url 'listings_category' category.name %}">
-                        {{ category.name }}
-                    </a>
-                {% endfor %}
-            </small>
-            <p>{{ post.body | slice:":400" }}...</p>
+
+        <div class="blog-item">
+            <a href="{% url 'listings_detail' post.pk %}" class="blog-link">
+                <h2 class="blog-title">{{ post.title }}</h2>
+                <p class="blog-location">Location: <span>{{ post.location }}</span></p>
+                <p class="blog-pay-range">Pay Range: <span> {{ post.pay_range }}</span></p>
+                <p class="blog-date-posted">Date Posted: <span>{{ post.created_on.date }}</span></p>
+                <div class="blog-body">
+                    <p>{{ post.body | slice:":400" }}...</p>
+                </div>
+                <div class="blog-categories">
+                    <p>Categories: <span>{% for category in post.categories.all %}
+                        <a href="{% url 'listings_category' category.name %}">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}</span></p>
+                </div>
+            </a>
+            
+        </div>
+
            
         {% endfor %}
     {% endblock posts %}
